@@ -13,3 +13,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
+/storage/*
+!storage/app
+!storage/app/public
