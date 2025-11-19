@@ -1,6 +1,7 @@
 # もぎたてフリマ（商品管理アプリ）
 
 ## 概要
+
 商品を登録・編集・削除・検索できるフリマサイト風の Web アプリケーションです。
 商品には複数の季節（季節タグ）を紐付けでき、商品一覧から季節や価格で絞り込み検索が可能です。
 ## セットアップ手順
@@ -9,21 +10,28 @@
 - git clone git@github.com:yurinaniko/mogitate-flea-market.git
 - cd mogitate-flea-market
 ```
+
 ### 2. Docker 起動
+
 ```
 - docker compose up -d --build
 - docker compose exec php bash
 ```
+
 ### 3. Composer インストール
+
 ```
 - composer install
 ```
+
 ### 4. .env ファイル作成
+
 ```
 - cp .env.example .env
 ```
+
 ### 5. .env 設定
-以下の内容を `.env.example` に合わせて `.env` を作成してください。
+
 ```dotenv
 - APP_NAME=laravel
 - APP_ENV=local
@@ -38,26 +46,32 @@
 - DB_USERNAME=laravel_user
 - DB_PASSWORD=laravel_pass
 ```
+
 ### 6. アプリケーションキー生成
+
 ```bash
 - php artisan key:generate
 ```
+
 ### 7. データベース設定 & マイグレーション + シーディング
+
 ```
 - php artisan migrate --seed
 ```
+
 ### 8. アプリケーション確認
+
 ```
 - http://localhost:8000
 ```
-###　　備考 M1 / M2 Mac を使用している場合
-Dockerビルド時に以下のエラーが発生することがあります：
-```
-no matching manifest for linux/arm64/v8 in the manifest list entries
-```
-その場合は `docker-compose.yml` の `mysql` サービス内に `platform` を追記してください。
+
+### 備考 M1/M2 Mac を使用している場合
 
 ```
+Dockerビルド時に以下のエラーが発生することがあります：
+no matching manifest for linux/arm64/v8 in the manifest list entries
+その場合は `docker-compose.yml` の `mysql` サービス内に `platform` を追記してください。
+
 yaml
 mysql:
   platform: linux/x86_64
@@ -71,6 +85,7 @@ mysql:
 ```
 
 ## 使用技術
+
 ```
 | 種類                    | バージョン |
 | ----------------------- | ---------- |
@@ -81,6 +96,7 @@ mysql:
 | Nginx                   | 1.25       |
 | Blade / BEM CSS         | UI 実装    |
 ```
+
 ## 機能一覧
 
 - 商品一覧表示
