@@ -39,9 +39,11 @@
 - DB_PASSWORD=laravel_pass
 ```
 ### 6. アプリケーションキー生成
-```
+
+```bash
 - php artisan key:generate
 ```
+
 ### 7. データベース設定 & マイグレーション + シーディング
 ```
 - php artisan migrate --seed
@@ -106,7 +108,7 @@ mysql:
 | 検索 | GET | /products?keyword= |
 ```
 
-## ER 図
+### ER 図
 
 ![ER図](src/docs/er.png)
 
