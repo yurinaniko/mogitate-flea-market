@@ -1,0 +1,272 @@
+.product-edit {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 100px;
+    background-color: #F4F4F4;
+    border-radius: 12px;
+}
+
+.product-edit__title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.product-edit__title span {
+    color: #333;
+}
+
+.product-edit__form {
+    width: 100%;
+}
+
+.product-edit__wrapper {
+    display: flex;
+    gap: 40px;
+}
+
+/* 左カラム */
+.product-edit__left {
+    width: 40%;
+    text-align: center;
+}
+
+.product-edit__image-area img {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.product-edit__file-label {
+    width: 120px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: none;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #333;
+    background-color: #e0e0e0;
+}
+
+.product-edit__file-label:hover {
+    opacity: 0.7;
+}
+
+.product-edit__file {
+    display: none;
+}
+
+.product-edit__right {
+    width: 60%;
+}
+
+.form-row {
+    margin-bottom: 40px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form__error {
+    margin-top: 4px;
+    font-size: 14px;
+    color: #c33;
+}
+
+.seasons-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+}
+
+.season-option {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.product-edit__buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.button {
+    width: 180px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 4px;
+    border: none;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.button__back {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.button__save {
+    background-color: #ffd700;
+    color: #333;
+}
+
+.product-edit__delete details {
+    position: relative;
+}
+
+.modal-content {
+    position: absolute;
+    right: -10px;
+    bottom: 0;
+    transform: translate(100%, -20px);
+    z-index: 100;
+    background-color: #fff;
+    padding: 4px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 200px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+.modal-content p{
+    margin: 0;
+    font-size: 14px;
+}
+
+.modal-open {
+    cursor: pointer;
+}
+
+.modal-delete {
+    margin-right: 10px;
+}
+
+.modal[open]>summary,
+.modal>summary {
+    list-style: none;
+}
+
+.modal>summary::-webkit-details-marker {
+    display: none;
+}
+
+.season-option input[type="checkbox"] {
+    display: none;
+}
+
+/* テキスト部分 */
+.season-option span {
+    position: relative;
+    padding-left: 26px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.season-option span:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+/* 選択された時の丸の中身 + チェック */
+.season-option input[type="checkbox"]:checked+span:after {
+    content: '✔';
+    position: absolute;
+    left: 3px;
+    top: 50%;
+    transform: translateY(-58%);
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.season-option input[type="checkbox"]:checked+span:before {
+    background-color: #333;
+    border-color: #333;
+}
+
+/* 削除モーダル */
+.product-edit__delete {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -30px;
+    padding-right: 20px;
+}
+
+.product-delete__icon {
+    width: 24px;
+    cursor: pointer;
+}
+
+.product-delete__icon:hover {
+    opacity: 0.6;
+}
+
+#preview-image {
+    z-index: 1;
+    position: relative;
+}
+
+.product-edit__image-error {
+    text-align: left;
+    margin-top: 8px;
+    color: #d9534f;
+}
+
+.return-link {
+    color: #2FA4E7;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.return-link:hover {
+    opacity: 0.7;
+}
+
+.description-row {
+    width: 100%;
+}
+
+.description-row .form-textarea {
+    width: 100%;
+}
