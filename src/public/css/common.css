@@ -1,0 +1,174 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+html {
+    box-sizing: border-box;
+}
+
+/* すべての余白計算を border-box に統一 */
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+/* ---------- 全体のフォント・背景色 ---------- */
+body {
+    background-color: #F4F4F4;
+}
+
+.wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ---------- ボタンの共通設定（必要なら） ---------- */
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+/* ---------- 画像リセット ---------- */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill {
+    box-shadow: 0 0 0 0px 1000px #F4F4F4 inset;
+    outline: none;
+}
+
+.search-form input:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px #f4d47e;
+}
+
+/* ===== datalist候補リストの青枠を消す ===== */
+input::-webkit-calendar-picker-indicator,
+input::-webkit-clear-button,
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button,
+input::-webkit-datalist-button,
+datalist option:focus,
+datalist option:active {
+    outline: none;
+    box-shadow: none;
+}
+/* ==== Chrome datalist のフォーカス青枠と水色背景を消す ==== */
+input::-webkit-calendar-picker-indicator,
+input::-webkit-clear-button,
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button,
+input::-webkit-datalist-button {
+    display: none;
+}
+
+datalist option:focus,
+datalist option:hover,
+datalist option:active {
+    outline: none;
+    background: transparent !important;
+    color: #333;
+}
+
+input[list]::-webkit-input-placeholder {
+    color: #C4C4C4;
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #e5b85a;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 999;
+}
+* ----------------------------------------------------------- 共通スタイル（フォーム全体の青線消去） ----------------------------------------------------------- */ input:focus,
+textarea:focus,
+select:focus,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: none;
+    box-shadow: none;
+    border-color: #C4C4C4;
+}
+
+/* -----------------------------------------------------------
+    Chrome autofill の水色背景を防ぐ
+----------------------------------------------------------- */
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill {
+    transition: background-color 9999s;
+}
+
+/* -----------------------------------------------------------
+    datalist 用（青枠 / 水色背景 / スピンボタン削除）
+----------------------------------------------------------- */
+input::-webkit-calendar-picker-indicator,
+input::-webkit-clear-button,
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button,
+input::-webkit-datalist-button {
+    display: none;
+}
+
+datalist option:focus,
+datalist option:hover,
+datalist option:active {
+    outline: none;
+    background: transparent;
+    color: #333;
+}
+
+/* -----------------------------------------------------------
+    placeholder
+----------------------------------------------------------- */
+input[list]::-webkit-input-placeholder {
+    color: #C4C4C4;
+}
+input:focus {
+    border-color: #8b7969;
+}
+
+/* ===== 入力時の青線（border-colorの強制変更） ===== */
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #C4C4C4;
+}
+
+input,
+textarea,
+select {
+    border: 1px solid #C4C4C4;
+}
+
+/* ===== 全フォームフォーカス時の青線消去 ===== */
+input:focus,
+textarea:focus,
+select:focus,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #C4C4C4 !important;
+}
