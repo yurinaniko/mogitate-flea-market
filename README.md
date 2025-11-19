@@ -24,7 +24,7 @@
 ```
 ### 5. .env 設定
 以下の内容を `.env.example` に合わせて `.env` を作成してください。
-```
+```dotenv
 - APP_NAME=laravel
 - APP_ENV=local
 - APP_KEY=
@@ -39,11 +39,9 @@
 - DB_PASSWORD=laravel_pass
 ```
 ### 6. アプリケーションキー生成
-
 ```bash
 - php artisan key:generate
 ```
-
 ### 7. データベース設定 & マイグレーション + シーディング
 ```
 - php artisan migrate --seed
