@@ -6,7 +6,6 @@
     margin: 0 auto;
     padding-top: 20px;
     background: #F4F4F4;
-    font-family: 'Inika', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
 }
 
 .product-create__title {
@@ -39,7 +38,6 @@
 .form-label {
     display: block;
     margin-bottom: 0px;
-    font-size: 14px;
 }
 
 .form-note {
@@ -62,19 +60,28 @@
     margin-bottom: 16px;
 }
 
-.form-input,
 .form-textarea {
     width: 100%;
     padding: 14px;
-    border: 1px solid #C4C4C4;
     border-radius: 4px;
     font-size: 14px;
     background: #FFFFFF;
+    border: 1px solid #C4C4C4;
     margin-bottom: 4px;
+    resize: none;
+}
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #C4C4C4;
+    border: 1px solid #C4C4C4;
+    box-shadow: 0 0 4px rgba(139, 121, 105, 0.4);
 }
 
-.form-textarea {
-    resize: none;
+.form-input {
+    margin-bottom: 16px;
 }
 
 .seasons-group {
@@ -112,6 +119,7 @@
     border: 2px solid #333;
     border-radius: 50%;
     box-sizing: border-box;
+    background-color: #fff;
 }
 
 .season-option input[type="checkbox"]:checked+span:after {
@@ -125,7 +133,6 @@
     color: #FFFFFF;
 }
 
-/* チェック時の丸背景黒 */
 .season-option input[type="checkbox"]:checked+span:before {
     background-color: #333;
     border-color: #333;
@@ -166,6 +173,7 @@
 .button {
     width: 180px;
     height: 40px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -187,14 +195,6 @@
     color: #333;
 }
 
-input:focus,
-textarea:focus,
-select:focus {
-    outline: none;
-    box-shadow: none;
-    border-color: #C4C4C4;
-}
-
 .search-form_input::placeholder {
     color: #FFFFFF;
 }
@@ -211,11 +211,27 @@ select:focus {
 #preview-image {
     max-width: 100%;
     border-radius: 8px;
-    display: none;
 }
 
 .image-preview {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #C4C4C4;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    border: 1px solid #C4C4C4;
+    box-shadow: 0 0 4px rgba(139, 121, 105, 0.4);
 }
