@@ -15,11 +15,11 @@ Route::prefix('products')->group(function () {
 
     Route::post('/', [ProductController::class, 'store'])->name('products.store');
 
-    // ★ 商品更新（edit より上）
-    Route::put('/{id}/update', [ProductController::class, 'update'])->name('products.update');
+    // 先に edit を書く！
+    Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+
+    // その後に update を書く！
+    Route::put('/{id}', [ProductController::class, 'update'])->name('products.update');
 
     Route::delete('/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
-
-    // ★ 商品詳細（兼 編集画面）
-    Route::get('/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 });

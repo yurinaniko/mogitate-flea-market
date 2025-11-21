@@ -14,21 +14,22 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         // デフォルト（編集画面で画像そのままの時用）
-        $imageRule = 'nullable|image|mimes:jpeg,jpg,png|max:2048';
+        $imageRule = 'bail|mimes:jpeg,jpg,png|max:2048|image|nullable';
 
         // 編集(PUT/PATCH)のとき、画像削除が押されていたら必須に
         if ($this->isMethod('put') || $this->isMethod('patch')) {
             if ($this->delete_image === "1") {
-                $imageRule = 'required|image|mimes:jpeg,jpg,png|max:2048';
+            $imageRule = 'bail|mimes:jpeg,jpg,png|max:2048|image|required';
             }
         }
 
         // 新規登録(POST)のときは常に必須
         if ($this->isMethod('post')) {
-            $imageRule = 'required|image|mimes:jpeg,jpg,png|max:2048';
+            $imageRule = 'bail|mimes:jpeg,jpg,png|max:2048|image|required';
         }
 
-        return [
+
+        $rules = [
             'name'        => 'required|string|max:255',
             'price'       => 'required|numeric|between:0,10000',
             'seasons'     => 'required|array|min:1',
@@ -36,6 +37,20 @@ class ProductRequest extends FormRequest
             'description' => 'required|string|max:120',
             'image'       => $imageRule,
         ];
+        return $rules;
+    }
+
+    protected function prepareForValidation()
+    {
+        if ($this->filled('seasons')) {
+        $this->merge([
+            'seasons' => array_map('intval', $this->seasons),
+        ]);
+        } else {
+        $this->merge([
+            'seasons' => [],  // 全部未選択なら空配列にする
+        ]);
+        }
     }
 
     public function attributes(): array

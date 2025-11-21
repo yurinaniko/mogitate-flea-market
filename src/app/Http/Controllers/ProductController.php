@@ -74,40 +74,44 @@ class ProductController extends Controller
         $seasons = Season::all();
         return view('products.create', compact('seasons'));
     }
-
     public function update(ProductRequest $request, $id)
     {
-        $product = Product::findOrFail($id);
+    $product = Product::findOrFail($id);
+    $validated = $request->validated();
 
-        // ★ 現在の画像名確保
-        $imageName = $product->image;
+    // 現在の画像名を確保
+    $oldImage = $product->image;
 
-        // 画像削除チェック ON の場合
-        if ($request->delete_image === "1") {
-        Storage::disk('public')->delete('products/' . $imageName);
-        $imageName = null;
+    // 季節の更新
+    $product->seasons()->sync($validated['seasons']);
+
+    // ① 画像削除のみ
+    if ($request->delete_image === "1") {
+        if ($oldImage) {
+            Storage::disk('public')->delete('products/' . $oldImage);
         }
-        // ★ 新しい画像がアップロードされた場合のみ変更
-        if ($request->hasFile('image')) {
-        $image = $request->file('image')->store('products', 'public');
-        $imageName = basename($image);
+        $validated['image'] = null;
         }
 
-        // バリデーション済みデータ取得
-        $validated = $request->validated();
+    // ② 新しい画像アップロード
+    // 新しい画像がアップロードされた場合
+    if ($request->hasFile('image')) {
 
-        // validated に必ず image をセット
-        $validated['image'] = $imageName;
+        // ★ 前の画像を削除（これが重要）
+        if ($oldImage) {
+            Storage::disk('public')->delete('products/' . $oldImage);
+        }
 
-       // ★ データ更新
-        $product->update($validated);
+        $path = $request->file('image')->store('products', 'public');
+        $validated['image'] = basename($path);
+        }
 
-       // seasons 更新
-        $product->seasons()->sync($request->input('seasons', []));
+    // 更新
+    $product->update($validated);
 
         return redirect()
-        ->route('products.index')
-        ->with('success', '商品情報を更新しました');
+            ->route('products.index')
+            ->with('success', '商品情報を更新しました');
     }
 
     public function destroy($id)

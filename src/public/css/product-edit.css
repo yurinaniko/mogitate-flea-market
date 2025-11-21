@@ -21,17 +21,6 @@
     width: 100%;
 }
 
-.product-edit__wrapper {
-    display: flex;
-    gap: 40px;
-}
-
-/* 左カラム */
-.product-edit__left {
-    width: 40%;
-    text-align: center;
-}
-
 .product-edit__image-area img {
     width: 100%;
     max-width: 320px;
@@ -42,11 +31,11 @@
 .product-edit__file-label {
     width: 120px;
     height: 36px;
+    margin: 8px;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    border: none;
     text-decoration: none;
     font-size: 14px;
     cursor: pointer;
@@ -60,6 +49,15 @@
 
 .product-edit__file {
     display: none;
+}
+
+.product-edit__wrapper {
+    display: flex;
+    gap: 40px;
+}
+
+.product-edit__left {
+    width: 40%;
 }
 
 .product-edit__right {
@@ -76,15 +74,6 @@
     font-size: 14px;
 }
 
-.form-input,
-.form-textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-}
-
 .form-textarea {
     resize: vertical;
     min-height: 120px;
@@ -94,18 +83,6 @@
     margin-top: 4px;
     font-size: 14px;
     color: #c33;
-}
-
-.seasons-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 16px;
-}
-
-.season-option {
-    display: flex;
-    align-items: center;
-    gap: 4px;
 }
 
 .product-edit__buttons {
@@ -124,10 +101,8 @@
     align-items: center;
     text-align: center;
     border-radius: 4px;
-    border: none;
     text-decoration: none;
     font-size: 14px;
-    cursor: pointer;
 }
 
 .button__back {
@@ -146,22 +121,32 @@
 
 .modal-content {
     position: absolute;
-    right: -10px;
-    bottom: 0;
-    transform: translate(100%, -20px);
+    right: -80px;
+    bottom: 40px;
+    transform: translate(0, 0);
     z-index: 100;
     background-color: #fff;
-    padding: 4px;
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    width: 200px;
+    width: 180px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    text-align: center;
 }
 
 .modal-content p{
-    margin: 0;
+    text-align: center;
+    width: 100%;
+    display: block;
+    margin: 0 auto 16px;
     font-size: 14px;
+}
+
+.modal-content button,
+.modal-content form button {
+    display: block;
+    width: 100%;
+    margin: 6px auto;
+    text-align: center;
 }
 
 .modal-open {
@@ -181,11 +166,23 @@
     display: none;
 }
 
-.season-option input[type="checkbox"] {
-    display: none;
+.seasons-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
 }
 
-/* テキスト部分 */
+.season-option {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.season-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+}
+
 .season-option span {
     position: relative;
     padding-left: 26px;
@@ -204,10 +201,10 @@
     height: 16px;
     border: 2px solid #333;
     border-radius: 50%;
+    background-color: #fff;
     box-sizing: border-box;
 }
 
-/* 選択された時の丸の中身 + チェック */
 .season-option input[type="checkbox"]:checked+span:after {
     content: '✔';
     position: absolute;
@@ -224,7 +221,6 @@
     border-color: #333;
 }
 
-/* 削除モーダル */
 .product-edit__delete {
     width: 100%;
     display: flex;
@@ -269,4 +265,36 @@
 
 .description-row .form-textarea {
     width: 100%;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-textarea {
+    padding: 10px;
+    border: 1px solid #C4C4C4;
+}
+
+.form-textarea:focus {
+    border: 1px solid #C4C4C4;
+    box-shadow: 0 0 4px rgba(139, 121, 105, 0.4);
+    outline: none;
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #C4C4C4;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    border: 1px solid #C4C4C4;
+    box-shadow: 0 0 4px rgba(139, 121, 105, 0.4);
 }
