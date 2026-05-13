@@ -39,21 +39,16 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request)
     {
-        // ①バリデーション済みデータ
         $validated = $request->validated();
-
-       // ②画像アップロード（バリデーション通過後）
         $image = $request->file('image')->store('products', 'public');
         $validated['image'] = basename($image);
 
-        // ③DB登録
         $product = Product::create([
             'name' => $request->name,
             'price' => $request->price,
             'description' => $request->description,
             'image' => basename($image),
         ]);
-        // ④seasons登録
         if ($request->seasons) {
         $product->seasons()->sync($request->seasons);
         }
@@ -70,7 +65,6 @@ class ProductController extends Controller
 
     public function create()
     {
-        // 季節一覧を画面に渡す
         $seasons = Season::all();
         return view('products.create', compact('seasons'));
     }
@@ -79,13 +73,10 @@ class ProductController extends Controller
     $product = Product::findOrFail($id);
     $validated = $request->validated();
 
-    // 現在の画像名を確保
     $oldImage = $product->image;
 
-    // 季節の更新
     $product->seasons()->sync($validated['seasons']);
 
-    // ① 画像削除のみ
     if ($request->delete_image === "1") {
         if ($oldImage) {
             Storage::disk('public')->delete('products/' . $oldImage);
@@ -93,11 +84,8 @@ class ProductController extends Controller
         $validated['image'] = null;
         }
 
-    // ② 新しい画像アップロード
-    // 新しい画像がアップロードされた場合
     if ($request->hasFile('image')) {
 
-        // ★ 前の画像を削除（これが重要）
         if ($oldImage) {
             Storage::disk('public')->delete('products/' . $oldImage);
         }
@@ -106,7 +94,6 @@ class ProductController extends Controller
         $validated['image'] = basename($path);
         }
 
-    // 更新
     $product->update($validated);
 
         return redirect()
@@ -117,9 +104,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::findOrFail($id);
-        // 画像ファイルも削除
         Storage::disk('public')->delete('products/' . $product->image);
-        // データ削除
         $product->delete();
         return redirect()
             ->route('products.index')

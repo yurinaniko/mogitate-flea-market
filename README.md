@@ -65,11 +65,6 @@ php artisan migrate --seed
 php artisan storage:link
 ```
 
-### 9. 起動
-```
-php artisan serve
-```
-
 ### 10. アプリケーション確認
 
 ```
