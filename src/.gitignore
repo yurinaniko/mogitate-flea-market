@@ -15,4 +15,4 @@ yarn-error.log
 /.vscode
 /storage/*
 !storage/app
-!storage/app/public
+!storage/app/public/products

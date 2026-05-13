@@ -19,10 +19,11 @@ docker compose up -d --build
 docker compose exec php bash
 ```
 
-### 3. Composer インストール
+### 3. Composer 必要パッケージインストール
 
 ```
 composer install
+npm install && npm run build
 ```
 
 ### 4. .env ファイル作成
@@ -59,8 +60,17 @@ php artisan key:generate
 ```
 php artisan migrate --seed
 ```
+### 8. 画像参照用シンボリックリンク作成
+```
+php artisan storage:link
+```
 
-### 8. アプリケーション確認
+### 9. 起動
+```
+php artisan serve
+```
+
+### 10. アプリケーション確認
 
 ```
 http://localhost:8000
