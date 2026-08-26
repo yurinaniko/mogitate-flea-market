@@ -35,3 +35,13 @@ updates:
     cooldown:
       default-days: 7
     open-pull-requests-limit: 5
+
+  # src/src にも別の package.json がある（Vite用）。ここも監視対象に含める
+  - package-ecosystem: 'npm'
+    directory: '/src/src'
+    schedule:
+      interval: 'weekly'
+    cooldown:
+      default-days: 7
+      semver-major-days: 30
+    open-pull-requests-limit: 5
