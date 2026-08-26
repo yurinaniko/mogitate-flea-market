@@ -63,6 +63,21 @@ return [
             ]) : [],
         ],
 
+        // テスト専用の接続。DB名を固定しているので、環境変数の設定漏れで
+        // 開発用DBを指してしまう事故が起きない。
+        'mysql_test' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST', 'mysql'),
+            'port' => env('DB_PORT', '3306'),
+            'database' => 'laravel_test',
+            'username' => 'root',
+            'password' => 'root',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

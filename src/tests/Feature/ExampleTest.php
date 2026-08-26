@@ -7,6 +7,8 @@ use Tests\TestCase;
 
 class ExampleTest extends TestCase
 {
+    use RefreshDatabase;
+
     /** @test */
     public function トップページは商品一覧へリダイレクトする()
     {

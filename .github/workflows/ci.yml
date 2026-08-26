@@ -68,14 +68,16 @@ jobs:
           DB_PASSWORD: root
         run: php artisan migrate --force
 
+      # phpunit.xml がテスト専用接続(mysql_test / laravel_test)を指すので、
+      # CIのMySQLにもそのDBを用意する。
+      - name: テスト用DBを作成
+        run: mysql -h 127.0.0.1 -P 3306 -uroot -proot -e "CREATE DATABASE IF NOT EXISTS laravel_test;"
+
       - name: テスト実行
         working-directory: src
         env:
           DB_HOST: 127.0.0.1
           DB_PORT: 3306
-          DB_DATABASE: laravel_db
-          DB_USERNAME: root
-          DB_PASSWORD: root
         run: php artisan test
 
   audit:
