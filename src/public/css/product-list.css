@@ -338,6 +338,16 @@
     .product-list {
         grid-template-columns: repeat(2, 1fr);
     }
+    /* 2列になると1枚が狭く、商品名と価格を横並びにすると重なって折り返す。
+       2列と同じ900pxで縦積みにして、どの幅でも重ならないようにする。 */
+    .product-card__content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    .product-card__price {
+        text-align: left;
+    }
 }
 
 @media (max-width: 480px) {
@@ -352,14 +362,5 @@
     }
     .product-list__header-right {
         margin-bottom: 0;
-    }
-    /* 狭い2列カードでは商品名と価格を横並びにすると窮屈なので縦に積む */
-    .product-card__content {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 4px;
-    }
-    .product-card__price {
-        text-align: left;
     }
 }
