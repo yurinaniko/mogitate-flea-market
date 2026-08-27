@@ -318,3 +318,49 @@
     margin: 0;
     text-align: right;
 }
+
+/* =========================
+   レスポンシブ（タブレット・スマホ）
+========================= */
+@media (max-width: 900px) {
+    /* @yield直下で左右paddingが無く端が切れるため余白を付与 */
+    .product-list__main {
+        padding: 5px 16px;
+    }
+    /* 検索を上・商品を下の縦積みに（元は横並びで商品が右に押し込まれていた） */
+    .product-list__container {
+        flex-direction: column;
+    }
+    .search-section {
+        width: 100%;
+    }
+    /* 商品グリッドを2列に（3列だと1枚が細すぎてタイトルが縦書きになる） */
+    .product-list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    /* 2列になると1枚が狭く、商品名と価格を横並びにすると重なって折り返す。
+       2列と同じ900pxで縦積みにして、どの幅でも重ならないようにする。 */
+    .product-card__content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    .product-card__price {
+        text-align: left;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-list {
+        gap: 12px;
+    }
+    /* タイトルと「商品を追加」を縦に */
+    .product-list__header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .product-list__header-right {
+        margin-bottom: 0;
+    }
+}
