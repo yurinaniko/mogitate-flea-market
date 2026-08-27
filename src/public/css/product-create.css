@@ -235,3 +235,34 @@ select:focus {
     border: 1px solid #C4C4C4;
     box-shadow: 0 0 4px rgba(139, 121, 105, 0.4);
 }
+/* =========================
+   レスポンシブ（タブレット・スマホ）
+========================= */
+@media (max-width: 768px) {
+    /* 幅50%固定だとスマホで窮屈なので90%に */
+    .product-create__title,
+    .product-create__form {
+        width: 90%;
+    }
+    /* 保存・戻るボタンを縦積み・フル幅に（180px×2は横並びだとはみ出す） */
+    .product-create__buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .button {
+        width: 100%;
+        max-width: 300px;
+    }
+    /* 画像プレビューを画面幅に収める */
+    .image-preview-wrapper {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        aspect-ratio: 300 / 220;
+    }
+    .seasons-group {
+        flex-wrap: wrap;
+        gap: 12px 16px;
+    }
+}

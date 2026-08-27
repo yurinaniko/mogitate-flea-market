@@ -298,3 +298,41 @@
     border: 1px solid #C4C4C4;
     box-shadow: 0 0 4px rgba(139, 121, 105, 0.4);
 }
+/* =========================
+   レスポンシブ（タブレット・スマホ）
+========================= */
+@media (max-width: 900px) {
+    /* 左右padding 100px はスマホで内容が潰れるので縮める */
+    .product-edit {
+        padding: 24px 16px;
+    }
+    /* 画像(左40%)と入力(右60%)の横並びを縦積みに */
+    .product-edit__wrapper {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .product-edit__left,
+    .product-edit__right {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    /* 保存・戻るボタンを縦積み・フル幅に */
+    .product-edit__buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+    }
+    .product-edit .button {
+        width: 100%;
+        max-width: 300px;
+    }
+    /* 削除確認モーダルが画面右外に出ないよう位置を調整 */
+    .modal-content {
+        right: 0;
+    }
+    .seasons-group {
+        gap: 8px 12px;
+    }
+}
