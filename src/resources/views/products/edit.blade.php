@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
-<link rel="stylesheet" href="{{ asset('css/product-list.css') }}">
-<link rel="stylesheet" href="{{ asset('css/product-edit.css') }}">
+<link rel="stylesheet" href="{{ versioned_asset('css/sanitize.css') }}">
+<link rel="stylesheet" href="{{ versioned_asset('css/product-list.css') }}">
+<link rel="stylesheet" href="{{ versioned_asset('css/product-edit.css') }}">
 @endsection
 
 @section('content')
