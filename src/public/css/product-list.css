@@ -359,6 +359,9 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
+        /* ヘッダ末尾（商品を追加ボタン）と検索フォームが密着して重なって見える
+           のを防ぐため、下に余白を確保する */
+        margin-bottom: 16px;
     }
     .product-list__header-right {
         margin-bottom: 0;
