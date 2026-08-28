@@ -100,7 +100,7 @@ jobs:
       # それを || true が握りつぶして「一覧を出す」意図すら果たせていなかった。
       - name: composer audit
         working-directory: src
-        run: composer audit --locked --no-interaction || true
+        run: composer audit --locked --no-interaction
 
       - name: npm audit
         working-directory: src
