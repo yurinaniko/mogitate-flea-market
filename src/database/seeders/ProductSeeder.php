@@ -3,12 +3,25 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
 
 class ProductSeeder extends Seeder
 {
     public function run(): void
     {
+        // シード画像はGit管理下の database/seeders/images に置き、シーディング時に
+        // storageへコピーする。storage/app/public は利用者のアップロード先なので
+        // Git追跡せず、クローン直後でもシード商品の画像が404にならないようにする。
+        Storage::disk('public')->makeDirectory('products');
+        foreach (File::files(database_path('seeders/images')) as $file) {
+            File::copy(
+                $file->getPathname(),
+                Storage::disk('public')->path('products/' . $file->getFilename())
+            );
+        }
+
         $products = [
             ['name' => 'キウイ', 'price' => 800, 'description' => 'キウイは甘みと酸味のバランスが絶妙なフルーツです。ビタミンCなどの栄養素も豊富で、美容効果や疲労回復効果も期待できます。もぎたてフルーツのスムージーをお召し上がりください!', 'image' => 'kiwi.png'],
             ['name' => 'ストロベリー', 'price' => 1200, 'description' => '大人から子供まで大人気のストロベリー。当店では鮮度抜群の完熟いちごを使用しています。ビタミンCはもちろん食物繊維も豊富なため、腸内環境の改善も期待できます。もぎたてフルーツのスムージーをお召し上がりください!', 'image' => 'strawberry.png'],

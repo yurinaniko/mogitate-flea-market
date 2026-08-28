@@ -3,7 +3,7 @@
 ## 概要
 ```
 商品を登録・編集・削除・検索できるフリマサイト風の Web アプリケーションです。
-商品には複数の季節（季節タグ）を紐付けでき、商品一覧から季節や価格で絞り込み検索が可能です。
+商品には複数の季節（季節タグ）を紐付けでき、商品一覧ではキーワード検索と価格の並び替えができます。
 ```
 ## セットアップ手順
 ### 1. リポジトリのクローン
@@ -19,27 +19,28 @@ docker compose up -d --build
 docker compose exec php bash
 ```
 
-### 3. Composer 必要パッケージインストール
-
-```
-composer install
-npm install && npm run build
-```
-
-### 4. .env ファイル作成
+### 3. .env ファイル作成
 
 ```
 cp .env.example .env
 ```
 
+### 4. Composer 必要パッケージインストール
+
+```
+composer install
+```
+
+※ CSSは public/css/ の静的ファイルのため、npm によるビルドは不要です。
+
 ### 5. .env 設定
 
 ```dotenv
-APP_NAME=laravel
+APP_NAME=Laravel
 APP_ENV=local
 APP_KEY=
 APP_DEBUG=true
-APP_URL=http://localhost
+APP_URL=http://localhost:8002
 
 DB_CONNECTION=mysql
 DB_HOST=mysql
@@ -65,29 +66,32 @@ php artisan migrate --seed
 php artisan storage:link
 ```
 
-### 10. アプリケーション確認
+### 9. アプリケーション確認
 
 ```
-http://localhost:8002
+アプリ:        http://localhost:8002
+phpMyAdmin:   http://localhost:8083（DB確認用）
+```
+※ MySQL はホスト側 3309 番で公開しています（GUIツールから接続する場合）。
+
+### 10. テストの実行
+
+```
+# テスト用DBを作成（初回のみ・コンテナの外から）
+docker compose exec mysql mysql -uroot -proot -e "CREATE DATABASE IF NOT EXISTS laravel_test;"
+# 実行（PHPコンテナ内で）
+php artisan test
 ```
 
-### 備考 M1/M2 Mac を使用している場合
+Feature テスト20件（バリデーションの境界値・シーディングの再現性）。
+CI（GitHub Actions）でもプッシュごとにテストと composer audit --locked による
+依存脆弱性監査を実行しています。
+
+### 備考 Apple Silicon (M1/M2) Mac について
 
 ```
-Dockerビルド時に以下のエラーが発生することがあります：
-no matching manifest for linux/arm64/v8 in the manifest list entries
-その場合は `docker-compose.yml` の `mysql` サービス内に `platform` を追記してください。
-
-yaml
-mysql:
-  platform: linux/x86_64
-  image: mysql:8.0
-  container_name: mysql
-  environment:
-    MYSQL_ROOT_PASSWORD: root
-    MYSQL_DATABASE: laravel_db
-    MYSQL_USER: laravel_user
-    MYSQL_PASSWORD: laravel_pass
+docker-compose.yml で全サービスに platform: linux/arm64/v8 と
+arm64v8系イメージを指定済みのため、追加の設定なしで動作します。
 ```
 
 ## 使用技術
@@ -95,8 +99,8 @@ mysql:
 ```
 | 種類                     | バージョン  |
 | ----------------------- | ---------- |
-| PHP                     | 8.1        |
-| Laravel                 | 10.x       |
+| PHP                     | 8.3        |
+| Laravel                 | 12.x（8で構築後、8→9→10→11→12へ段階アップグレード済み） |
 | MySQL                   | 8.0        |
 | Docker / docker-compose | 最新        |
 | Nginx                   | 1.25       |
@@ -111,9 +115,8 @@ mysql:
 - 価格順並び替え機能（安い順 / 高い順）
 - ページネーション
 
-・商品詳細
-- 商品編集（画像差し替え / 画像削除）
-- 商品削除
+・商品編集（画像の差し替え）
+・商品削除
 
 ・商品登録（画像アップロード / バリデーション / 季節の複数選択）
 
@@ -124,7 +127,6 @@ mysql:
 | 画面       | HTTP method | path                   　　　　　　　　　　　　 |
 |-----------|-------------|---------------------------------------------|　　　　　　　
 | 商品一覧   | GET         | /products                                   |
-| 商品詳細   | GET         | /products/{id}                              |
 | 商品登録   | GET         | /products/create                            |
 | 登録実行   | POST        | /products                                   |
 | 商品編集   | GET         | /products/{id}/edit                         |
@@ -146,7 +148,7 @@ mysql:
 | id          | BIGINT          | NOT NULL | auto_increment    | 主キー                   |
 | name        | VARCHAR(255)    | NOT NULL | —                 | 商品名                   |
 | price       | INT             | NOT NULL | —                 | 0〜10000 バリデーション    |
-| description | VARCHAR(120)    | NOT NULL | —                 | 商品説明（120文字以内）     |
+| description | TEXT            | NOT NULL | —                 | 商品説明（バリデーションで120文字以内） |
 | image       | VARCHAR(255)    | NOT NULL | —                 | 商品画像ファイル名          |
 | created_at  | TIMESTAMP       | —        | CURRENT_TIMESTAMP | 作成日時                  |
 | updated_at  | TIMESTAMP       | —        | CURRENT_TIMESTAMP | 更新日時                  |
@@ -189,7 +191,8 @@ http://localhost:8002
 - 商品の季節は複数選択可能（belongsToMany / 中間テーブル product_season）
 - 編集画面では、season の入力保持を実現（初回は product 値、バリデーションエラー時は old 優先）
 - 商品検索と価格並び替え機能を同時に適用可能（クエリパラメータ保持による state 維持）
-- 画像削除専用モーダルを実装（画像のみ削除 / 商品削除 / キャンセル切替）
+- 削除確認モーダルを実装（画像の差し替え / 商品削除 / キャンセル切替）
+- シード画像は database/seeders/images でGit管理し、シーディング時にstorageへコピー（クローン直後でも画像が表示される）
 ```
 ### 備考
 ```
