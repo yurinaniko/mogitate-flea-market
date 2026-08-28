@@ -68,7 +68,7 @@ php artisan storage:link
 ### 10. アプリケーション確認
 
 ```
-http://localhost:8000
+http://localhost:8002
 ```
 
 ### 備考 M1/M2 Mac を使用している場合
@@ -181,7 +181,7 @@ mysql:
 ```
 ## 動作確認URL
 ```
-http://localhost:8000
+http://localhost:8002
 ```
 ### 実装した応用機能
 ```
