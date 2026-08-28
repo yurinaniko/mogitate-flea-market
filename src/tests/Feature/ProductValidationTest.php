@@ -56,7 +56,7 @@ class ProductValidationTest extends TestCase
         }
     }
 
-    public function 値段の境界(): array
+    public static function 値段の境界(): array
     {
         return [
             '下限ちょうど 0円' => [0, true],
@@ -86,7 +86,7 @@ class ProductValidationTest extends TestCase
         }
     }
 
-    public function 商品説明の境界(): array
+    public static function 商品説明の境界(): array
     {
         return [
             '上限ちょうど 120文字' => [120, true],
@@ -114,7 +114,7 @@ class ProductValidationTest extends TestCase
         }
     }
 
-    public function 画像の種類(): array
+    public static function 画像の種類(): array
     {
         return [
             'jpg は通る' => ['ichigo.jpg', 'image/jpeg', true],
