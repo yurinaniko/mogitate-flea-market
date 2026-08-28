@@ -96,11 +96,13 @@ jobs:
           tools: composer:v2
 
       # --locked: インストール不要でlockファイルを直接監査する。
+      # --ignore-unreachable: Packagist APIへの一時的な接続断（curl 28）で
+      # CIが赤くなる誤検知を防ぐ。脆弱性が検知されれば通常どおり失敗する。
       # 旧設定は install をしていないのに audit していたため常に失敗し、
       # それを || true が握りつぶして「一覧を出す」意図すら果たせていなかった。
       - name: composer audit
         working-directory: src
-        run: composer audit --locked --no-interaction
+        run: composer audit --locked --no-interaction --ignore-unreachable
 
       - name: npm audit
         working-directory: src
