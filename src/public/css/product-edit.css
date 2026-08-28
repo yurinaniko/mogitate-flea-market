@@ -315,6 +315,18 @@
     .product-edit__right {
         width: 100%;
     }
+    /* スマホでは画像と「ファイルを選択」ボタンを中央寄せにする */
+    .product-edit__left {
+        text-align: center;
+    }
+    .product-edit__image-area img {
+        display: block;
+        margin: 0 auto;
+    }
+    .product-edit__file-label {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @media (max-width: 768px) {
