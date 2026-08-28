@@ -141,6 +141,15 @@ class ProductValidationTest extends TestCase
     }
 
     /** @test */
+    public function 存在しない季節IDは登録できない()
+    {
+        $this->post('/products', $this->入力(['seasons' => [999999]]))
+            ->assertSessionHasErrors('seasons.0');
+
+        $this->assertDatabaseCount('products', 0);
+    }
+
+    /** @test */
     public function 商品名は255文字ちょうどなら登録でき256文字は弾かれる()
     {
         $this->post('/products', $this->入力(['name' => str_repeat('あ', 255)]))

@@ -33,7 +33,7 @@ class ProductRequest extends FormRequest
             'name'        => 'required|string|max:255',
             'price'       => 'required|numeric|between:0,10000',
             'seasons'     => 'required|array|min:1',
-            'seasons.*'   => 'integer',
+            'seasons.*'   => 'integer|exists:seasons,id',
             'description' => 'required|string|max:120',
             'image'       => $imageRule,
         ];
