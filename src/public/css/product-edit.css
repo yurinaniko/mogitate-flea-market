@@ -344,6 +344,13 @@
     .modal-content {
         right: 0;
     }
+    /* PC用の margin-top: -30px はボタン横にゴミ箱を並べるためのもの。
+       スマホはボタンが縦積みになるため、引き上げると保存ボタンに重なる */
+    .product-edit__delete {
+        margin-top: 16px;
+        padding-right: 0;
+        justify-content: center;
+    }
     .seasons-group {
         gap: 8px 12px;
     }
